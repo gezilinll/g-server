@@ -65,14 +65,13 @@ module.exports = appInfo => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
 
-  // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
+  const myConfig = {
+    webAddress: 'http://localhost:5173',
   };
 
   return {
     ...config,
-    ...userConfig,
+    ...myConfig,
   };
 };
 

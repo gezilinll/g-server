@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 
 class UserController extends BaseController {
   async authorizeGithub() {
-    const { ctx } = this;
+    const { ctx, app } = this;
     const requestToken = ctx.request.query.code;
     const clientID = '2fc9877432c55cb75217';
     const clientSecret = 'ec8dee6348e6059c084a71e4bbbb15abec5a9466';
@@ -45,7 +45,7 @@ class UserController extends BaseController {
       }
       user = { id: userID, name };
     }
-    ctx.response.redirect(`http://localhost:5173/?id=${user.id}`);
+    ctx.response.redirect(`${app.config.webAddress}/?id=${user.id}`);
   }
 
   async getUserInfo() {
