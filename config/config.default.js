@@ -67,6 +67,8 @@ module.exports = appInfo => {
 
   const myConfig = {
     webAddress: 'http://localhost:5173',
+    githubID: '2fc9877432c55cb75217',
+    githubSecret: 'ec8dee6348e6059c084a71e4bbbb15abec5a9466',
   };
 
   return {

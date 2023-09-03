@@ -8,13 +8,11 @@ class UserController extends BaseController {
   async authorizeGithub() {
     const { ctx, app } = this;
     const requestToken = ctx.request.query.code;
-    const clientID = '2fc9877432c55cb75217';
-    const clientSecret = 'ec8dee6348e6059c084a71e4bbbb15abec5a9466';
     const tokenResponse = await axios({
       method: 'post',
       url: 'https://github.com/login/oauth/access_token?' +
-        `client_id=${clientID}&` +
-        `client_secret=${clientSecret}&` +
+        `client_id=${app.config.githubID}&` +
+        `client_secret=${app.config.githubSecret}&` +
         `code=${requestToken}`,
       headers: {
         accept: 'application/json',
