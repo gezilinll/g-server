@@ -18,6 +18,41 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.jwt = {
+    secret: 'gezilinll-localhost-secret',
+  };
+  config.mysql = {
+    app: true,
+    agent: false,
+    client: {
+      host: '127.0.0.1',
+      port: 3306,
+      user: 'root',
+      password: '123456',
+      database: 'g-blitz',
+    },
+  };
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    username: 'root',
+    password: '123456',
+    database: 'g-blitz',
+    define: {
+      timestamps: false,
+      freezeTableName: true,
+    },
+  };
+  config.redis = {
+    client: {
+      port: 6379,
+      host: '127.0.0.1',
+      password: '',
+      db: 0,
+    },
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -28,3 +63,4 @@ module.exports = appInfo => {
     ...userConfig,
   };
 };
+
