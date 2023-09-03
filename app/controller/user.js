@@ -45,7 +45,16 @@ class UserController extends BaseController {
       }
       user = { id: userID, name };
     }
-    ctx.response.redirect(`http://localhost:5173/?id=${user.id}&name=${user.userName}`);
+    ctx.response.redirect(`http://localhost:5173/?id=${user.id}`);
+  }
+
+  async getUserInfo() {
+    const { ctx } = this;
+    const user = await ctx.service.user.getUser({ id: ctx.request.query.id });
+    if (user) {
+      ctx.body = { id: user.id, userName: user.userName };
+      ctx.status = 200;
+    }
   }
 }
 

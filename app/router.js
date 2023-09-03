@@ -4,4 +4,5 @@ module.exports = app => {
   const { router, controller } = app;
 
   router.get('/api/authorize/github', controller.user.authorizeGithub);
+  router.get('/api/getUserInfo', controller.user.getUserInfo);
 };
