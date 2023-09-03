@@ -1,33 +1,16 @@
-# g-server
+# Environment
+1. install MySQL and create database `g-blitz`  and create scheme `user`
+   1. SQL: TBD
+   2. Config of MySQL: `config/config.default.js:mysql&sequelize`
+2. install Redis and start server
+   1. Config of Redis: `config/config.default.js:redis`
+3. confirm local website address and other user config
+   1. Config of User: `config/config.default.js:myConfig`
 
+# Quick Start
 
-
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Development
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+```javascript
+pnpm install
+pnpm run dev
 ```
 
-### Deploy
-
-```bash
-$ npm start
-$ npm stop
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
