@@ -1,6 +1,6 @@
-import { Controller, Get, Query, Req, Res } from '@nestjs/common';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -33,8 +33,9 @@ export class UserController {
         Authorization: `token ${accessToken}`,
       },
     });
-    const { githubID, name } = result.data;
-    let user = await this.userService.findByGithubID(githubID);
+    const { id: githubID, name } = result.data;
+    console.log('authorizeGithub githubID', githubID);
+    let user = await this.userService.findOneByGithubID(githubID);
     if (!user) {
       const userID = uuidv4();
       const result = await this.userService.insert({
@@ -45,18 +46,23 @@ export class UserController {
       if (!result) {
         //TODO
       }
+      console.log('authorizeGithub A', userID);
       user = { id: userID, name, githubID };
     }
+
+    console.log('authorizeGithub', user.id);
 
     res.redirect(`${process.env.webAddress}/?id=${user.id}`);
   }
 
-  @Get('requestUserInfo')
-  async requestUserInfo(@Query('id') id: string, @Res() res: Response) {
-    const user = await this.userService.findByID(id);
+  @Get('findOne')
+  async findOne(@Query('id') id: string, @Res() res: Response) {
+    console.log('findOne', id);
+    const user = await this.userService.findOneByID(id);
+    console.log('findOne', user);
     if (user) {
       res.statusCode = 200;
-      res.write({ id: user.id, userName: user.name });
+      res.send({ id: user.id, userName: user.name });
     }
   }
 }

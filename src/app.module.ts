@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from './user/user.entity';
 import { ConfigModule } from '@nestjs/config';
-
-@Module({
-  imports: [ConfigModule.forRoot()],
-})
+import { UserModule } from './user/user.module';
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
@@ -20,11 +16,7 @@ import { ConfigModule } from '@nestjs/config';
       entities: [User],
       synchronize: true,
     }),
+    UserModule,
   ],
-})
-@Module({
-  imports: [],
-  controllers: [UserController],
-  providers: [UserService],
 })
 export class AppModule {}

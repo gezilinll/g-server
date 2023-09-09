@@ -18,15 +18,11 @@ export class UserService {
     return this.usersRepository.insert(user);
   }
 
-  findOne(id: string): Promise<User | null> {
+  findOneByID(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ id });
   }
 
-  findByID(id: string): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
-  }
-
-  findByGithubID(id: string): Promise<User | null> {
+  findOneByGithubID(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ githubID: id });
   }
 
