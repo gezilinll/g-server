@@ -1,12 +1,17 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Res, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { JwtAuthGuard } from './jwt.guard';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private jwtService: JwtService,
+  ) {}
 
   @Get('authorizeGithub')
   async authorizeGithub(
@@ -34,7 +39,6 @@ export class UserController {
       },
     });
     const { id: githubID, name } = result.data;
-    console.log('authorizeGithub githubID', githubID);
     let user = await this.userService.findOneByGithubID(githubID);
     if (!user) {
       const userID = uuidv4();
@@ -50,16 +54,16 @@ export class UserController {
       user = { id: userID, name, githubID };
     }
 
-    console.log('authorizeGithub', user.id);
-
-    res.redirect(`${process.env.webAddress}/?id=${user.id}`);
+    const token = await this.jwtService.signAsync(JSON.stringify(user), {
+      secret: process.env.jwtSecret,
+    });
+    res.redirect(`${process.env.webAddress}/?token=${token}&userID=${user.id}`);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('findOne')
   async findOne(@Query('id') id: string, @Res() res: Response) {
-    console.log('findOne', id);
     const user = await this.userService.findOneByID(id);
-    console.log('findOne', user);
     if (user) {
       res.statusCode = 200;
       res.send({ id: user.id, userName: user.name });
