@@ -4,8 +4,8 @@ import { User } from './user/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { RecordModule } from './record/record.module';
-import { Record } from './record/record.entity';
+import { RecordModule } from './board/board.module';
+import { Board } from './board/board.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -16,7 +16,7 @@ import { Record } from './record/record.entity';
       username: 'root',
       password: '123456',
       database: 'g-database',
-      entities: [User, Record],
+      entities: [User, Board],
       synchronize: true,
     }),
     UserModule,

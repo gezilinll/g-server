@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Record {
+export class Board {
   @PrimaryColumn()
   id: string;
 
@@ -13,4 +13,13 @@ export class Record {
 
   @Column('text')
   content: string;
+
+  @Column()
+  permission: string;
+
+  @Column('timestamp')
+  createdAt: Date;
+
+  @Column('timestamp')
+  updatedAt: Date;
 }
