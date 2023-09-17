@@ -14,7 +14,7 @@ import { Board } from './board/board.entity';
       host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: '123456',
+      password: process.env.dbPWD,
       database: 'g-database',
       entities: [User, Board],
       synchronize: true,
