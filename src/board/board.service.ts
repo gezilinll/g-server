@@ -10,6 +10,12 @@ export class BoardService {
     private boardRepository: Repository<Board>,
   ) {}
 
+  find(id: string) {
+    return this.boardRepository.find({
+      where: { id },
+    });
+  }
+
   findAll(userID: string) {
     return this.boardRepository.find({
       where: { userID },

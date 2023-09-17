@@ -17,6 +17,12 @@ import { format } from 'date-fns';
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
 
+  @Get('find')
+  async find(@Query('id') id: string, @Res() res: Response) {
+    const result = await this.boardService.find(id);
+    res.status(HttpStatus.OK).send(result[0]);
+  }
+
   @Get('findAll')
   async findAll(@Query('userID') userID: string, @Res() res: Response) {
     const records = await this.boardService.findAll(userID);
@@ -43,16 +49,19 @@ export class BoardController {
     const content = JSON.stringify(initBoard);
 
     const timestamp = new Date();
-    await this.boardService.insert({
+    const sendInfo = {
       id,
-      userID,
       title: initBoard.title,
-      content,
       permission: 'public',
       createdAt: timestamp,
       updatedAt: timestamp,
+    };
+    await this.boardService.insert({
+      ...sendInfo,
+      userID,
+      content,
     });
-    res.status(HttpStatus.OK).send({ id, title: initBoard.title, content });
+    res.status(HttpStatus.OK).send(sendInfo);
   }
 
   @Get('updateContent')
