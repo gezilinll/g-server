@@ -20,13 +20,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@hocuspocus/server": "^2.5.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/passport": "^10.0.1",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.2.5",
+    "@nestjs/platform-ws": "^10.2.5",
     "@nestjs/typeorm": "^10.0.0",
+    "@nestjs/websockets": "^10.2.5",
     "axios": "^1.5.0",
     "date-fns": "^2.30.0",
     "moment": "^2.29.4",
@@ -36,7 +40,9 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.17",
-    "uuid": "^9.0.0"
+    "url": "^0.11.3",
+    "uuid": "^9.0.0",
+    "yjs": "^13.6.8"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

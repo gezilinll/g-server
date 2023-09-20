@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { RecordModule } from './board/board.module';
 import { Board } from './board/board.entity';
+import { CollabGateway } from './collab/collab.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,5 +24,6 @@ import { Board } from './board/board.entity';
     AuthModule,
     RecordModule,
   ],
+  providers: [CollabGateway],
 })
 export class AppModule {}
