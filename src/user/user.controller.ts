@@ -45,7 +45,7 @@ export class UserController {
     const user = await this.userService.findOneByID(id);
     if (user) {
       res.statusCode = 200;
-      res.send({ id: user.id, userName: user.name });
+      res.send({ id: user.id, name: user.name });
     }
   }
 }
